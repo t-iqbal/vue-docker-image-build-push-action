@@ -19,10 +19,10 @@ jobs:
 #         TAG: 3.1
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ REPOSITORY_NAME }}:$(date +%F)
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(date +%F)
       
     - name: Docker Login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       
     - name: Image push
-      run: docker push ${{ secrets.DOCKER_USER }}/${{ REPOSITORY_NAME }}:$(date +%F)
+      run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(date +%F)
