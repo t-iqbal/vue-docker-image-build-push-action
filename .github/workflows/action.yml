@@ -19,7 +19,7 @@ jobs:
        TAG: 3.1
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(TAG)
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(git log -1 --pretty=%H)
       
     - name: Docker Login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
