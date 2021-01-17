@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Set Tag in evn variable
-      run: echo ${git log -1 --pretty=%H}
+      run: echo $(git log -1 --pretty=%H)
       env:
        TAG: 3.1
       
