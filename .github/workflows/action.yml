@@ -14,9 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Set Tag in evn variable
-      run: echo ${TAG}
+      run: echo ${git log -1 --pretty=%H}
       env:
-       TAG: $(git log -1 --pretty=%H)
+       TAG: 3.1
       
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(TAG)
