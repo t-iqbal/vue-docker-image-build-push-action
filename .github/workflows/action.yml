@@ -18,17 +18,17 @@ jobs:
       env:
        NAME: ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}
        TAG: $(git log -1 --pretty=%H)
-       IMG: ${NAME}:${TAG}
-       LATEST: ${NAME}:latest
+       IMG: $NAME:$TAG
+       LATEST: $NAME:latest
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${IMG}
+      run: docker build . --file Dockerfile --tag $IMG
     
     - name: Tag the image to latest
-      run: docker tag ${IMG} ${LATEST}
+      run: docker tag $IMG $LATEST
       
     - name: Docker Login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       
     - name: Image push
-      run: docker push ${LATEST}
+      run: docker push $LATEST
