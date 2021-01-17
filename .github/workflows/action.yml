@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-#     - name: Set Tag in evn variable
-#       run: echo ${TAG}
-#       env:
-#         TAG: 3.1
+    - name: Set Tag in evn variable
+      run: echo ${TAG}
+      env:
+       TAG: $(git log -1 --pretty=%H)
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(date +%F)
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/${{ secrets.REPOSITORY_NAME }}:$(TAG)
       
     - name: Docker Login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
