@@ -22,13 +22,13 @@ jobs:
        LATEST: $NAME:latest
       
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${NAME}:${$GITHUB_SHA}
+      run: docker build . --file Dockerfile --tag $NAME:$GITHUB_SHA
     
     - name: Tag the image to latest
-      run: docker tag ${NAME}:${$GITHUB_SHA} ${NAME}:latest
+      run: docker tag $NAME:$GITHUB_SHA $NAME:latest
       
     - name: Docker Login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       
     - name: Image push
-      run: docker push ${NAME}:latest
+      run: docker push $NAME:latest
